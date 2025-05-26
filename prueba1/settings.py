@@ -37,8 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Aplicación que gestiona las funcionalidades relacionadas con los usuarios del sistema,
+    # como el registro, autenticación y roles.
     'usuario',
+
+    # Aplicación encargada del manejo de los productos que se ofrecen o almacenan,
+    # incluyendo información como nombre, categoría, precio, etc.
     'Producto',
+
+    # Aplicación responsable del control del inventario general,
+    # registrando entradas, existencias y niveles de stock de los productos.
     'Inventario',
 ]
 
