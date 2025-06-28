@@ -1,36 +1,47 @@
 from rest_framework import generics
 from .models import Inventario, Stock
 from .serializer import InventarioSerializer, StockSerializer
+from django.http import HttpResponse
+from import_export.resources import ModelResource
+from import_export.formats.base_formats import XLSX
 
-# === INVENTARIO ===
 
-# Esta vista permite consultar la lista completa de los inventarios existentes
-# o agregar un nuevo registro. Se usa para operaciones de tipo GET y POST.
 class InventarioListCreateView(generics.ListCreateAPIView):
-
-    # Define la fuente de datos, en este caso todos los objetos del modelo Inventario.
     queryset = Inventario.objects.all()
-
-    # Especifica qué clase se encargará de convertir los datos del modelo a JSON y viceversa.
     serializer_class = InventarioSerializer
 
-# Esta vista se utiliza para obtener los detalles de un inventario específico,
-# así como para editarlo o eliminarlo usando métodos GET, PUT, PATCH o DELETE.
 class InventarioDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Inventario.objects.all()
     serializer_class = InventarioSerializer
 
-
-# === STOCK ===
-
-# Vista que permite ver todos los registros de stock o crear un nuevo registro.
-# Se usa principalmente con métodos GET y POST.
 class StockListCreateView(generics.ListCreateAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
 
-# Vista orientada a manejar operaciones sobre un solo registro de stock,
-# ya sea para consultarlo, actualizarlo o eliminarlo.
 class StockDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
+
+class InventarioResource(ModelResource):
+    class Meta:
+        model = Inventario
+
+
+def exportar_inventario_excel(request):
+    # usamos la clase InventarioResource para acceder a los datos del modelo de inventario
+    dataset = InventarioResource().export()
+
+    # XLSX() es el formato de exportación proporcionado por django-import-export
+    export_data = XLSX().export_data(dataset)
+
+    # establecemos el tipo de contenido correspondiente a archivos .xlsx
+    response = HttpResponse(
+        export_data, 
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+
+    # indicamos que el archivo debe descargarse con el nombre "inventario.xlsx"
+    response['Content-Disposition'] = 'attachment; filename="inventario.xlsx"'
+
+    # retornamos la respuesta para que el navegador descargue el archivo
+    return response

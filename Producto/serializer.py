@@ -16,7 +16,7 @@ class CategoriaSerializer(serializers.ModelSerializer):
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
-        fields = ['nombre', 'descripcion', 'stock', 'precio', 'fecha_vencimiento', 'fecha_fabricabion', 'categoria', 'persona']
+        fields = ['nombre', 'descripcion', 'stock', 'precio', 'fecha_vencimiento', 'fecha_fabricacion']
 
 
 # Serializador para el modelo Venta
@@ -25,4 +25,4 @@ class ProductoSerializer(serializers.ModelSerializer):
 class VentaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venta
-        fields = ['prodcuto', 'cantidad_producto', 'fecha_venta', 'total_precio']
+        fields = ['cantidad_producto', 'fecha_venta', 'total_precio', 'producto']

@@ -19,4 +19,13 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Incluye las rutas de cada app
+    path('api/Producto/', include('Producto.urls')),
+    path('api/Inventario/', include('Inventario.urls')),
+    path('api/usuario/', include('usuario.urls')),
+    path('api/calendario/', include('calendario.urls')),
+    path('api/iniciosesion/', include('iniciosesion.urls')),
+    path('api/conferencias/', include('conferencias.url')),
 ]
+

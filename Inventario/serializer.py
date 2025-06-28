@@ -7,7 +7,7 @@ from .models import Inventario, Stock
 class InventarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventario
-        fields = ['producto', 'fecha_inventario']
+        fields = ['id', 'fecha_inventario', 'producto', 'stock', 'comentario']
 
 
 
@@ -16,5 +16,5 @@ class InventarioSerializer(serializers.ModelSerializer):
 class StockSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stock
-        fields = ['inventario', 'cantidad_stock']
+        fields = ['cantidad_stock', 'nombre_producto', 'categoria']
         

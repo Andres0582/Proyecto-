@@ -3,7 +3,7 @@ from django.db import models
 # Modelo que representa un rol dentro del sistema (por ejemplo: administrador, vendedor, etc.)
 class Rol(models.Model):
     # Campo de texto que almacena el nombre del rol, limitado a 20 caracteres.
-    nombre = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=50)
 
     # Campo de texto que describe brevemente el rol, con un máximo de 100 caracteres.
     descripcion = models.CharField(max_length=100)
@@ -24,9 +24,6 @@ class persona(models.Model):
     # Contraseña de acceso. Se guarda como texto, aunque en un sistema real se recomienda cifrarla.
     contraseña = models.CharField(max_length=20)
 
-    # Relación con el modelo Rol. Cada persona tiene asignado un único rol.
-    # Si se elimina un rol, también se eliminan las personas que lo tengan asignado.
-    rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
 
     # Representación textual del modelo, devuelve el nombre de la persona.
     def __str__(self):

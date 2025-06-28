@@ -49,6 +49,12 @@ INSTALLED_APPS = [
     # Aplicación responsable del control del inventario general,
     # registrando entradas, existencias y niveles de stock de los productos.
     'Inventario',
+    'asistencias',
+    'calendario',
+    'iniciosesion',
+    'conferencias',
+    'rest_framework',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'prueba1.urls'
+ROOT_URLCONF =   'prueba1.urls'
 
 TEMPLATES = [
     {
